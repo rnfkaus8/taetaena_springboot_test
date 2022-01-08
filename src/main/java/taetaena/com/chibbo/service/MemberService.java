@@ -3,13 +3,13 @@ package taetaena.com.chibbo.service;
 import java.util.List;
 import java.util.Optional;
 
+
 import taetaena.com.chibbo.domain.Member;
 import taetaena.com.chibbo.repository.MemberRepository;
 
 public class MemberService {
 	
 	private final MemberRepository memberRepository;
-	
 	
 	public MemberService(MemberRepository memberRepository) {
 		this.memberRepository = memberRepository;
