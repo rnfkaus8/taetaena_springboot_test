@@ -9,9 +9,9 @@ import taetaena.com.chibbo.domain.Member;
 
 public interface MemberRepository {
 	
-	Member save(Member member);
+	Member save(Member memeber);
 	Optional<Member> findById(Long id);
-	Optional<Member> findByName(String name);
+	Optional<Member> findByname(String name);
 	List<Member> findAll();
 	
 	
