@@ -3,12 +3,10 @@ package taetaena.com.chibbo.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.transaction.annotation.Transactional;
 
 import taetaena.com.chibbo.domain.Member;
 import taetaena.com.chibbo.repository.MemberRepository;
 
-@Transactional
 public class MemberService {
 	
 	private final MemberRepository memberRepository;
@@ -31,7 +29,7 @@ public class MemberService {
 	// 같은 이름이 있는 회원은 중복 회원으로 칭함
 	// 중복회원이 있으면 안됨
 	private void vaildateDuplicateMember(Member member) {
-		memberRepository.findByName(member.getName())
+		memberRepository.findByname(member.getName())
 				.ifPresent(m -> {
 					throw new IllegalStateException("이미 존재하는 회원입니다.");
 				});
