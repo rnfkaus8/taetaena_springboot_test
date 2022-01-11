@@ -50,6 +50,12 @@ public class JdbcTemplateMemberRepository implements MemberRepository {
 		List<Member> result = jdbcTemplate.query("select * from memeber where name = ?", memberRowMapper(), name);
 		return result.stream().findAny();
 	}
+	
+	@Override
+	public Optional<Member> findByPhoneNum(String phoneNum) {
+		List<Member> result = jdbcTemplate.query("select * from member where phone_num = ?", memberRowMapper(), phoneNum);
+		return result.stream().findAny();
+	}
 
 	@Override
 	public List<Member> findAll() {
@@ -62,7 +68,9 @@ public class JdbcTemplateMemberRepository implements MemberRepository {
 				Member member = new Member();
 				member.setId(rs.getLong("id"));
 				member.setName(rs.getString("name"));
+				member.setPhoneNum(rs.getString("phone_num"));
 				return member;
 			};
 	}
+
 }

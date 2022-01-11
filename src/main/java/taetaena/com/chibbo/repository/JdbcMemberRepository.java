@@ -117,6 +117,32 @@ public class JdbcMemberRepository implements MemberRepository {
 			close(conn, pstmt, rs);
 		}
 	}
+	
+	@Override
+	public Optional<Member> findByPhoneNum(String phoneNum) {
+		String sql = "select * from member where phone_num = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, phoneNum);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				Member member = new Member();
+				member.setId(rs.getLong("id"));
+				member.setName(rs.getString("name"));
+				member.setPhoneNum(rs.getString("phone_num"));
+				return Optional.of(member);
+			}
+			return Optional.empty();
+		} catch (Exception e) {
+			throw new IllegalStateException(e);
+		} finally {
+			close(conn, pstmt, rs);
+		}
+	}
 
 	private Connection getConnection() {
 		return DataSourceUtils.getConnection(dataSource);
@@ -149,5 +175,7 @@ public class JdbcMemberRepository implements MemberRepository {
 	private void close(Connection conn) throws SQLException {
 		DataSourceUtils.releaseConnection(conn, dataSource);
 	}
+
+	
 
 }

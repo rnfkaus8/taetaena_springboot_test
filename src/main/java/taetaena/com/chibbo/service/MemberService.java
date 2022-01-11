@@ -27,12 +27,18 @@ public class MemberService {
 	}
 	
 	// 같은 이름이 있는 회원은 중복 회원으로 칭함
+	// 같은 전화번호가 있는 회원은 중복 회원으로 칭함
 	// 중복회원이 있으면 안됨
 	private void vaildateDuplicateMember(Member member) {
 		memberRepository.findByName(member.getName())
 				.ifPresent(m -> {
 					throw new IllegalStateException("이미 존재하는 회원입니다.");
 				});
+		memberRepository.findByPhoneNum(member.getPhoneNum())
+				.ifPresent(m -> {
+					throw new IllegalStateException("이미 존재하는 회원입니다.");
+				});
+		
 	}
 	
 	/*

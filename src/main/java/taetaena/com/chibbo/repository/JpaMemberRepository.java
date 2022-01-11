@@ -38,8 +38,17 @@ public class JpaMemberRepository implements MemberRepository {
 	}
 
 	@Override
+	public Optional<Member> findByPhoneNum(String phoneNum) {
+		List<Member> result = em.createQuery("select m from Member m where m.phoneNum = :phoneNum", Member.class)
+				.setParameter("phoneNum", phoneNum)
+				.getResultList();
+		return result.stream().findAny();
+	}
+	
+	@Override
 	public List<Member> findAll() {
 		return em.createQuery("select m from Member m", Member.class).getResultList();
 	}
+
 
 }

@@ -3,6 +3,11 @@
 <head>
  <title>Hello</title>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <script type="text/javascript">
+ 	const autoRemoveHyphen = (target) =>{
+ 		target.value = target.value.replace('/[^0-9]/','').replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+ 	}
+ </script>
 </head>
 <body>
 	<div class="container">
@@ -11,7 +16,7 @@
 				<label for="name">이름</label>
 				<input type="text" id="name" name="name" placeholder="이름을 입력하세요">
 				<label for="phoneNum">전화번호</label>
-				<input type="text" id="phoneNum" name="phoneNum" placeholder="전화번호를 입력하세요">
+				<input type="text" oninput="autoRemoveHyphen(this)" maxlength="13" id="phoneNum" name="phoneNum" placeholder="전화번호를 입력하세요">
 				
 			</div>
 			<button type="submit">등록</button>

@@ -42,4 +42,11 @@ public class MemoryMemberRepository implements MemberRepository {
 		store.clear();
 	}
 
+	@Override
+	public Optional<Member> findByPhoneNum(String phoneNum) {
+		return store.values().stream()
+				.filter(member -> member.getPhoneNum().equals(phoneNum))
+				.findAny();
+	}
+
 }
